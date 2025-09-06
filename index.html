@@ -52,7 +52,7 @@
             <p class="text-center mt-2 font-awesome text-md text-yellow-800">Our limit edition seasonal coffee blend with notes of chocolate and berries.</p>
             <div class="flex justify-center justify-between m-2">
                 <p class="text-yellow-800 font-bold text-lg">$18.99</p>
-                <button class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Add to cart</button>
+                <button onclick="openModal()" class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Add to cart</button>
             </div>
         </div>
         <div class="h-96 w-64 bg-white rounded-md mt-4 ">
@@ -61,7 +61,7 @@
             <p class="text-center mt-2 font-awesome text-sm text-yellow-800">Fresh coffee delivered to your door monthly.choose your favorite roasts.</p>
             <div class="flex justify-center justify-between m-2">
                 <p class="text-yellow-800 font-bold text-lg">$24.99/month</p>
-                <button class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Subscribe</button>
+                <button onclick="openModal()" class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Subscribe</button>
             </div>
         </div>
         <div class="h-96 w-64 bg-white rounded-md mt-4 ">
@@ -70,7 +70,7 @@
             <p class="text-center mt-2 font-awesome text-sm text-yellow-800">The perfect gift for the coffee lover in your life.</p>
             <div class="flex justify-center justify-between m-2">
                 <p class="text-yellow-800 font-bold text-lg">$25-$100</p>
-                <button class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Purchase</button>
+                <button onclick="openModal()" class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Purchase</button>
             </div>
         </div>
         <div class="h-96 w-64 bg-white rounded-md mt-4 ">
@@ -79,7 +79,7 @@
             <p class="text-center mt-2 font-awesome text-sm text-yellow-800">The perfect gift for the coffee lover in your life.</p>
             <div class="flex justify-center justify-between m-2">
                 <p class="text-yellow-800 font-bold text-lg">$25-$100</p>
-                <button class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Purchase</button>
+                <button onclick="openModal()" class="w-24 h-8 border-yellow-800 border rounded-md text-sm text-yellow-800">Purchase</button>
             </div>
         </div>
         
@@ -99,7 +99,7 @@
           <div class="text-center mt-8 text-3xl font-bold text-yellow-700">
         <p>Our Signature Drinks</p>
      </div>
-     <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 items-center justify-center xl:grid-cols-4">
+     <div class="grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 items-center justify-center xl:grid-cols-4">
         <div class="h-96 w-64 rounded-xl mt-8 m-4 bg-white">
             <img class="h-64 w-96 rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs8oraBJ8Kg9zADesM36vWm6S9hLU0a1WWhA&s" alt="">
             <div class=" flex justify-between m-4">
@@ -152,7 +152,7 @@
             </div>
         </div>
              <div class="justify-center items-center flex">
-        <button class=" text-center w-32 h-8 border hover:bg-orange-600 bg-orange-400 rounded-md text-white text-sm">View All Events<i class="fa-solid fa-right-to-bracket"></i></button>
+        <button class=" text-center w-32 h-12 border hover:bg-orange-600 bg-orange-400 rounded-md text-white text-sm">View All Events<i class="fa-solid fa-right-to-bracket"></i></button>
         
      </div>
      </div>
@@ -248,5 +248,28 @@
      <div class="bg-orange-900 h-24 w-full text-white text-center items-center">
         <p class="">@2025 Coffee Haven. All right reserved.</p>
      </div>
+       <div id="paymentModal" class="hidden fixed inset-0 z-50 bg-black/60 justify-center items-center">
+    <div class="bg-white p-6 rounded-lg text-center max-w-sm w-11/12 shadow-2xl relative">
+      <span onclick="closeModal()" class="absolute -top-2 -right-2 bg-gray-800 text-white rounded-full h-8 w-8 flex items-center justify-center text-lg cursor-pointer">&times;</span>
+      <h2 class="text-xl font-bold mb-4">Pay with KH QR</h2>
+      <img src="qrcodekhqr.jpg" alt="ACLEDA QR Code" class="w-64 mb-4 mx-auto rounded-md">
+      <p class="font-semibold">Account: Bun Raksa</p>
+      <p class="font-semibold">Phone: 0968782196</p>
+    </div>
+  </div>
+
+  <script>
+    const paymentModal = document.getElementById('paymentModal');
+
+    function openModal() {
+      paymentModal.classList.remove('hidden');
+      paymentModal.classList.add('flex');
+    }
+
+    function closeModal() {
+      paymentModal.classList.add('hidden');
+      paymentModal.classList.remove('flex');
+    }
+  </script>
 </body>        
 </html>
