@@ -316,7 +316,9 @@
         listPanel.style.zIndex = '9999';
         listPanel.style.maxWidth = '200px';
         listPanel.style.fontSize = '14px';
-        listPanel.innerHTML = lists.map(item => '<div style="padding:4px 0;">' + item + '</div>').join('');
+        listPanel.style.cursor = "pointer";
+        // Hover effect should be handled with CSS, not JS
+        listPanel.innerHTML = lists.map(item => '<div style="padding:4px 0;" onmouseover="this.style.backgroundColor=\'#f3f4f6\'" onmouseout="this.style.backgroundColor=\'white\'">' + item + '</div>').join('');
         
         document.body.appendChild(listPanel);
       }
