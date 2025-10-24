@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-100">
     <!-- header -->
-    <div class=" h-12 bg-white fixed:w-full flex  fixed:w-full justify-between items-center p-4">
+    <div class=" h-12 bg-white fixed:w-full flex  fixed:w-full justify-between items-center p-4" id="head"  >
         <div class="">
             <h2 class="font-bold text-xl ">Coffee Haven</h2>
         </div>
@@ -261,15 +261,21 @@
 
   <script>
     const paymentModal = document.getElementById('paymentModal');
-
     function openModal() {
       paymentModal.classList.remove('hidden');
       paymentModal.classList.add('flex');
     }
-
     function closeModal() {
       paymentModal.classList.add('hidden');
       paymentModal.classList.remove('flex');
+    }
+    const head=document.getElementById("head");
+   window.onscroll= function listflex(){
+        if(pageYOffset>=0){
+            head.style.position="fixed";
+            head.style.top="0";
+            head.style.width="100%";
+        }
     }
   </script>
 </body>        
