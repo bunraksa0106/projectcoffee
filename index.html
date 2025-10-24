@@ -17,7 +17,7 @@
             <ul class="flex gap-2 ">
                 <li><a href="#" class="hover:text-orange-600">Home</a></li>
                 <li><a href="#" class="hover:text-orange-600">about</a></li>
-                <li><a href="#" class="hover:text-orange-600">menu</a></li>
+                <li><a href="#" class="hover:text-orange-600" >menu</a></li>
                 <li><a href="#" class="hover:text-orange-600">Shop</a></li>
                 <li><a href="#" class="hover:text-orange-600">Events</a></li>
                 <li><a href="#" class="hover:text-orange-600">More</a></li>
@@ -27,9 +27,10 @@
                 <div class="h-8 w-24 bg-orange-400 rounded-md text-white text-sm items-center text-center pt-1 hover:bg-orange-600">
                 <button>Order Online</button>
         </div>
-        <div class="hiden:grid-cols-1">
+        <div class="hiden:grid-cols-1 hover:cursor-pointer" >
             <i class="fa-regular fa-user"></i>
             <i class="fa-solid fa-cart-shopping"></i>
+            <i class="fa-solid fa-list" id="listright" onclick="list()"></i>
             </div>
     </div>
     </div>
@@ -249,6 +250,7 @@
      <div class="bg-orange-900 h-24 w-full text-white text-center items-center">
         <p class="">@2025 Coffee Haven. All right reserved.</p>
      </div>
+     <!-- payment method -->
        <div id="paymentModal" class="hidden fixed inset-0 z-50 bg-black/60 justify-center items-center">
     <div class="bg-white p-6 rounded-lg text-center max-w-sm w-64 shadow-2xl relative">
       <span onclick="closeModal()" class="absolute -top-2 -right-2 bg-gray-800 text-white rounded-full h-8 w-8 flex items-center justify-center text-lg cursor-pointer">&times;</span>
@@ -258,25 +260,88 @@
       <p class="font-semibold">Phone: 0968782196</p>
     </div>
   </div>
-
+  <!-- form login -->
+   
   <script>
-    const paymentModal = document.getElementById('paymentModal');
-    function openModal() {
-      paymentModal.classList.remove('hidden');
-      paymentModal.classList.add('flex');
-    }
-    function closeModal() {
-      paymentModal.classList.add('hidden');
-      paymentModal.classList.remove('flex');
-    }
-    const head=document.getElementById("head");
-   window.onscroll= function listflex(){
-        if(pageYOffset>=0){
-            head.style.position="fixed";
-            head.style.top="0";
-            head.style.width="100%";
+    document.addEventListener('DOMContentLoaded', function () {
+      // payment functions (exposed to global so inline onclick attributes still work)
+      const paymentModal = document.getElementById('paymentModal');
+      window.openModal = function () {
+        if (!paymentModal) return;
+        paymentModal.classList.remove('hidden');
+        paymentModal.classList.add('flex');
+      };
+      window.closeModal = function () {
+        if (!paymentModal) return;
+        paymentModal.classList.add('hidden');
+        paymentModal.classList.remove('flex');
+      };
+
+      // fixed header
+      const head = document.getElementById('head');
+      window.addEventListener('scroll', function () {
+        if (window.pageYOffset >= 0 && head) {
+          head.style.position = 'fixed';
+          head.style.top = '0';
+          head.style.width = '100%';
         }
-    }
+      });
+
+      // right list panel (create a small panel instead of overwriting the <i> element)
+      const listrightIcon = document.getElementById('listright');
+      const lists = [
+        "Iced latte",
+        "Iced Cappucino",
+        "Americano",
+        "Iced Chocolate",
+        "Matcha latte",
+        "Green Tea",
+        "Coconut Matcha latte",
+        "Hot latte"
+      ];
+
+      let listPanel = null;
+      function createListPanel() {
+        listPanel = document.createElement('div');
+        listPanel.id = 'listright-panel';
+        // basic positioning and styles (you can convert to Tailwind classes if preferred)
+        listPanel.style.position = 'fixed';
+        listPanel.style.right = '12px';
+        listPanel.style.top = '56px';
+        listPanel.style.background = 'white';
+        listPanel.style.color = '#1f2937';
+        listPanel.style.padding = '10px';
+        listPanel.style.borderRadius = '6px';
+        listPanel.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
+        listPanel.style.zIndex = '9999';
+        listPanel.style.maxWidth = '200px';
+        listPanel.style.fontSize = '14px';
+        listPanel.innerHTML = lists.map(item => '<div style="padding:4px 0;">' + item + '</div>').join('');
+        
+        document.body.appendChild(listPanel);
+      }
+
+      function toggleListPanel() {
+        if (!listrightIcon) return;
+        if (!listPanel) {
+          createListPanel();
+        } else {
+          listPanel.classList.toggle('hidden');
+        }
+      }
+
+      if (listrightIcon) {
+        listrightIcon.addEventListener('click', toggleListPanel);
+        // accessibility: make keyboard-activatable
+        listrightIcon.setAttribute('tabindex', '0');
+        listrightIcon.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleListPanel();
+          }
+        });
+      }
+    });
   </script>
 </body>        
 </html>
