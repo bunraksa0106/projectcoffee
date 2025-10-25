@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
           head.style.width = '100%';
         }
       });
-      // right list panel (create a small panel instead of overwriting the <i> element)
       const listrightIcon = document.getElementById('listright');
       const lists = [
         "Iced latte",
@@ -74,16 +73,45 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
     });
-    // lofin with js
-    const loingform=document.getElementById("loginform");
-        window.openModals = function () {
-        if (!loginform) return;
-        loingform.classList.remove('hidden');
-        loginform.classList.add('flex');
+    // login with js
+    const loginForm = document.getElementById("loginform");
+    window.openModals = function () {
+      if (!loginForm) return;
+      loginForm.classList.remove('hidden');
+      loginForm.classList.add('flex');
+    };
+    window.closeModals = function () {
+      if (!loginForm) return;
+      loginForm.classList.add('hidden');
+      loginForm.classList.remove('flex');
+    };
+    // Attach click handlers to specific trigger elements in the HTML instead of a global listener
+      // online order
+      const onlineOrder = document.getElementById("onlineOrder");
+      const num1 = document.getElementById("num1");
+      const num2 = document.getElementById("num2");
+      const sumElem = document.getElementById("sum");
+      
+      function process() {
+        const a = Number(num1.value) || 0;
+        const b = Number(num2.value) || 0;
+        const total = a + b;
+        if (sumElem) {
+          // support both input elements and normal elements
+          if ('value' in sumElem) sumElem.value = total;
+          else sumElem.textContent = total;
+        }
+        return total;
+      }
+      
+      window.openModalM = function () {
+        if (!onlineOrder) return;
+        onlineOrder.classList.remove('hidden');
+        onlineOrder.classList.add('flex');
       };
-        window.closeModals = function () {
-        if (!loginform) return;
-        loginform.classList.add('hidden');
-        loginform.classList.remove('flex');
+      window.closeModalM = function () {
+        if (!onlineOrder) return;
+        onlineOrder.classList.add('hidden');
+        onlineOrder.classList.remove('flex');
       };
-      addEventListener('click',loingform);
+      // Do not call openModalM immediately or attach a global click handler here; attach to a specific trigger element instead

@@ -25,7 +25,7 @@
             </div>
             <div class="flex gap-3 items-center ">
                 <div class="h-8 w-24 bg-orange-400 rounded-md text-white text-sm items-center text-center pt-1 hover:bg-orange-600">
-                <button>Order Online</button>
+                <button onclick="openModalM()" >Order Online</button>
         </div>
         <div class="hiden:grid-cols-1 hover:cursor-pointer" >
             <i class="fa-regular fa-user" onclick="openModals()" ></i>
@@ -167,7 +167,7 @@
             <div class="flex gap-4 items-center text-xl mt-4 text-yellow-700">
                 <a href="https://maps.app.goo.gl/vRrKLUZP4FqfASXw9"><i class="fa-solid fa-location-dot"></i></a>
                 
-                <p>Location</p>
+                <p>Location</p> 
             </div>
             <div class="">
             <div class="flex gap-4 items-center text-xl mt-4 text-yellow-700">
@@ -272,6 +272,148 @@
         <p class]="font-bold mt-4">or</p>
         <button class="w-24 h-8 bg-blue-500 rounded ml-5 mt-4 text-white hover:bg-blue-600">login</button>
    </div>
-   <script src="style.js"></script>
+   </div>
+   <!-- order online -->
+   <div id="orderModal" class="hidden fixed inset-0 z-50 bg-black/60 flex justify-center items-center">
+    <div class="bg-white w-64 h-96 border border-gray-800 p-4 rounded-lg relative">
+      <span onclick="closeModalM()" class="absolute -top-2 -right-2 bg-gray-800 text-white rounded-full h-8 w-8 flex items-center justify-center text-lg cursor-pointer">&times;</span>
+      <select name="drink" id="drink" class="w-48 h-8 border border-gray-800 mt-2">
+        <option value="iced-latte">Iced latte</option>
+        <option value="iced-americano">Iced Americano</option>
+        <option value="iced-green-tea">Iced Green tea</option>
+        <option value="iced-matcha-latte">Iced Matcha latte</option>
+        <option value="hot-latte">Hot latte</option>
+      </select>
+      <input id="num1" type="number" name="quantity" placeholder="Enter Qt" class="mt-4 w-48 h-8 border border-gray-800 font-bold text-gray-800 p-2">
+      <input id="num2" type="number" name="price" placeholder="Price" class="mt-4 w-48 h-8 border border-gray-800 font-bold text-gray-800 p-2">
+      <label for="" class="font-bold text-lg">Total</label>
+      <input type="number" name="" id="Total" class="mt-4 w-48 h-8 border border-gray-800 font-bold text-gray-800 p-2" readonly>
+      <button id="sum"  class="mt-4 ml-8 bg-blue-500 w-24 h-8 rounded-md text-white">Add to cart</button>
+    </div>
+   </div>
+   <!-- <script src="style.js"></script> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+      // payment functions (exposed to global so inline onclick attributes still work)
+      const paymentModal = document.getElementById('paymentModal');
+      window.openModal = function () {
+        if (!paymentModal) return;
+        paymentModal.classList.remove('hidden');
+        paymentModal.classList.add('flex');
+      };
+      window.closeModal = function () {
+        if (!paymentModal) return;
+        paymentModal.classList.add('hidden');
+        paymentModal.classList.remove('flex');
+      };
+      // fixed header
+      const head = document.getElementById('head');
+      window.addEventListener('scroll', function () {
+        if (window.pageYOffset >= 0&&head) {
+          head.style.position = 'fixed';
+          head.style.top = '0';
+          head.style.width = '100%';
+        }
+      });
+      const listrightIcon = document.getElementById('listright');
+      const lists = [
+        "Iced latte",
+        "Iced Cappucino",
+        "Americano",
+        "Iced Chocolate",
+        "Matcha latte",
+        "Green Tea",
+        "Coconut Matcha latte",
+        "Hot latte"
+      ];
+      let listPanel = null;
+      function createListPanel() {
+        listPanel = document.createElement('div');
+        listPanel.id = 'listright-panel';
+        // basic positioning and styles (you can convert to Tailwind classes if preferred)
+        listPanel.style.position = 'fixed';
+        listPanel.style.right = '12px';
+        listPanel.style.top = '56px';
+        listPanel.style.background = 'white';
+        listPanel.style.color = '#1f2937';
+        listPanel.style.padding = '10px';
+        listPanel.style.borderRadius = '6px';
+        listPanel.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
+        listPanel.style.zIndex = '9999';
+        listPanel.style.maxWidth = '200px';
+        listPanel.style.fontSize = '14px';
+        listPanel.style.cursor = "pointer";
+        // Hover effect should be handled with CSS, not JS
+        listPanel.innerHTML = lists.map(item => '<div style="padding:4px 0;" onmouseover="this.style.backgroundColor=\'#f3f4f6\'" onmouseout="this.style.backgroundColor=\'white\'">' + item + '</div>').join('');
+        
+        document.body.appendChild(listPanel);
+      }
+      function toggleListPanel() {
+        if (!listrightIcon) return;
+        if (!listPanel) {
+          createListPanel();
+        } else {
+          listPanel.classList.toggle('hidden');
+        }
+    }   
+      if (listrightIcon) {
+        listrightIcon.addEventListener('click', toggleListPanel);
+        // accessibility: make keyboard-activatable
+        listrightIcon.setAttribute('tabindex', '0');
+        listrightIcon.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleListPanel();
+          }
+        });
+      }
+    });
+    // login with js
+    const loginForm = document.getElementById("loginform");
+    window.openModals = function () {
+      if (!loginForm) return;
+      loginForm.classList.remove('hidden');
+      loginForm.classList.add('flex');
+    };
+    window.closeModals = function () {
+      if (!loginForm) return;
+      loginForm.classList.add('hidden');
+      loginForm.classList.remove('flex');
+    };
+    
+      const onlineOrder = document.getElementById("orderModal");
+      const num1 = document.getElementById("num1");
+      const num2 = document.getElementById("num2");
+      const sumElem = document.getElementById("sum");
+      const totalInput = document.getElementById("Total");
+      // compute total (quantity * price) and display in the Total input
+      function process() {
+        const a = Number(num1.value) || 0;
+        const b = Number(num2.value) || 0;
+        const total = a * b;
+        if (totalInput) {
+          totalInput.value = total;
+        }
+        return total;
+      }
+      if (sumElem) {
+        sumElem.addEventListener('click', function (e) {
+          e.preventDefault();
+          process();
+        });
+      }
+      
+      window.openModalM = function () {
+        if (!onlineOrder) return;
+        onlineOrder.classList.remove('hidden');
+        onlineOrder.classList.add('flex');
+      };
+      window.closeModalM = function () {
+        if (!onlineOrder) return;
+        onlineOrder.classList.add('hidden');
+        onlineOrder.classList.remove('flex');
+      };
+      // Do not call openModalM immediately or attach a global click handler here; attach to a specific trigger element instead
+    </script>
 </body>        
 </html>
