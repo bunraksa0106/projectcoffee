@@ -74,14 +74,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
     });
-    // fiunction order online
-    function orderonline(){
-
-    }
+    // lofin with js
     const loingform=document.getElementById("loginform");
         window.openModals = function () {
         if (!loginform) return;
         loingform.classList.remove('hidden');
         loginform.classList.add('flex');
       };
-      addEventListener.('click',loingform);
+      addEventListener('click',loingform);
