@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loginform.classList.add('flex');
       };
         window.closeModals = function () {
-        if (!paymentModal) return;
+        if (!loginform) return;
         loginform.classList.add('hidden');
         loginform.classList.remove('flex');
       };
