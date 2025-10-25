@@ -284,6 +284,7 @@
         <option value="iced-matcha-latte">Iced Matcha latte</option>
         <option value="hot-latte">Hot latte</option>
       </select>
+      <label for="">Drink</label>
       <input id="num1" type="number" name="quantity" placeholder="Enter Qt" class="mt-4 w-48 h-8 border border-gray-800 font-bold text-gray-800 p-2">
       <input id="num2" type="number" name="price" placeholder="Price" class="mt-4 w-48 h-8 border border-gray-800 font-bold text-gray-800 p-2">
       <label for="" class="font-bold text-lg">Total</label>
@@ -386,6 +387,20 @@
       const num2 = document.getElementById("num2");
       const sumElem = document.getElementById("sum");
       const totalInput = document.getElementById("Total");
+      // Example: set price automatically based on selected drink
+      
+      const drinkSelect = document.getElementById("drink");
+      drinkSelect.addEventListener('change', function () {
+        if (num2) {
+          if (drinkSelect.value === "iced-latte") num2.value = 2;
+          else if (drinkSelect.value === "iced-americano") num2.value = 2.65;
+          else if (drinkSelect.value === "iced-green-tea") num2.value = 3.00;
+          else if (drinkSelect.value === "iced-matcha-latte") num2.value = 3.59;
+          else if (drinkSelect.value === "hot-latte") num2.value = 2.15;
+          else num2.value = "";
+        }
+      });
+      
       // compute total (quantity * price) and display in the Total input
       function process() {
         const a = Number(num1.value) || 0;
