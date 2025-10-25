@@ -28,7 +28,7 @@
                 <button>Order Online</button>
         </div>
         <div class="hiden:grid-cols-1 hover:cursor-pointer" >
-            <i class="fa-regular fa-user"></i>
+            <i class="fa-regular fa-user" id=""></i>
             <i class="fa-solid fa-cart-shopping"></i>
             <i class="fa-solid fa-list" id="listright" onclick="list()"></i>
             </div>
@@ -276,7 +276,6 @@
         paymentModal.classList.add('hidden');
         paymentModal.classList.remove('flex');
       };
-
       // fixed header
       const head = document.getElementById('head');
       window.addEventListener('scroll', function () {
@@ -299,7 +298,6 @@
         "Coconut Matcha latte",
         "Hot latte"
       ];
-
       let listPanel = null;
       function createListPanel() {
         listPanel = document.createElement('div');
@@ -322,7 +320,6 @@
         
         document.body.appendChild(listPanel);
       }
-
       function toggleListPanel() {
         if (!listrightIcon) return;
         if (!listPanel) {
