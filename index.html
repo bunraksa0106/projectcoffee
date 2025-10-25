@@ -28,7 +28,7 @@
                 <button>Order Online</button>
         </div>
         <div class="hiden:grid-cols-1 hover:cursor-pointer" >
-            <i class="fa-regular fa-user" id=""></i>
+            <i class="fa-regular fa-user" onclick="openModals()" ></i>
             <i class="fa-solid fa-cart-shopping"></i>
             <i class="fa-solid fa-list" id="listright" onclick="list()"></i>
             </div>
@@ -260,87 +260,13 @@
       <p class="font-semibold">Phone: 0968782196</p>
     </div>
   </div>
-  <!-- form login -->
-   
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // payment functions (exposed to global so inline onclick attributes still work)
-      const paymentModal = document.getElementById('paymentModal');
-      window.openModal = function () {
-        if (!paymentModal) return;
-        paymentModal.classList.remove('hidden');
-        paymentModal.classList.add('flex');
-      };
-      window.closeModal = function () {
-        if (!paymentModal) return;
-        paymentModal.classList.add('hidden');
-        paymentModal.classList.remove('flex');
-      };
-      // fixed header
-      const head = document.getElementById('head');
-      window.addEventListener('scroll', function () {
-        if (window.pageYOffset >= 0 && head) {
-          head.style.position = 'fixed';
-          head.style.top = '0';
-          head.style.width = '100%';
-        }
-      });
-
-      // right list panel (create a small panel instead of overwriting the <i> element)
-      const listrightIcon = document.getElementById('listright');
-      const lists = [
-        "Iced latte",
-        "Iced Cappucino",
-        "Americano",
-        "Iced Chocolate",
-        "Matcha latte",
-        "Green Tea",
-        "Coconut Matcha latte",
-        "Hot latte"
-      ];
-      let listPanel = null;
-      function createListPanel() {
-        listPanel = document.createElement('div');
-        listPanel.id = 'listright-panel';
-        // basic positioning and styles (you can convert to Tailwind classes if preferred)
-        listPanel.style.position = 'fixed';
-        listPanel.style.right = '12px';
-        listPanel.style.top = '56px';
-        listPanel.style.background = 'white';
-        listPanel.style.color = '#1f2937';
-        listPanel.style.padding = '10px';
-        listPanel.style.borderRadius = '6px';
-        listPanel.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
-        listPanel.style.zIndex = '9999';
-        listPanel.style.maxWidth = '200px';
-        listPanel.style.fontSize = '14px';
-        listPanel.style.cursor = "pointer";
-        // Hover effect should be handled with CSS, not JS
-        listPanel.innerHTML = lists.map(item => '<div style="padding:4px 0;" onmouseover="this.style.backgroundColor=\'#f3f4f6\'" onmouseout="this.style.backgroundColor=\'white\'">' + item + '</div>').join('');
-        
-        document.body.appendChild(listPanel);
-      }
-      function toggleListPanel() {
-        if (!listrightIcon) return;
-        if (!listPanel) {
-          createListPanel();
-        } else {
-          listPanel.classList.toggle('hidden');
-        }
-      }
-
-      if (listrightIcon) {
-        listrightIcon.addEventListener('click', toggleListPanel);
-        // accessibility: make keyboard-activatable
-        listrightIcon.setAttribute('tabindex', '0');
-        listrightIcon.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleListPanel();
-          }
-        });
-      }
-    });
-  </script>
+  <!-- login   -->
+   <div id="loginform" class="hidden w-64 h-96 fixed inset-0 z-50 bg-gray-200 text-md  justify-center items-center">
+        <input type="text" name="" id="" class="items-center rounded-md justify-center mt-10 ml-5 w-48 h-8 p-2" placeholder="Enter Email or Phone">
+        <input type="password" name="" id="" class="items-center rounded-md justify-center mt-5 ml-5 w-48 h-8 p-2" placeholder="password">
+        <input type="password" name="" id="" class="items-center rounded-md justify-center mt-5 ml-5 w-48 h-8 p-2" placeholder="verify password">
+        <button class="w-24 h-8 bg-blue-500 rounded ml-14 mt-4 text-white hover:bg-blue-600">Register</button>
+   </div>
+   <script src="style.js"></script>
 </body>        
 </html>
