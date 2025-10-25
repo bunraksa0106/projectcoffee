@@ -81,4 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
         loingform.classList.remove('hidden');
         loginform.classList.add('flex');
       };
+        window.closeModals = function () {
+        if (!paymentModal) return;
+        loginform.classList.add('hidden');
+        loginform.classList.remove('flex');
+      };
       addEventListener('click',loingform);
