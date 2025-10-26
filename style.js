@@ -85,23 +85,41 @@ document.addEventListener('DOMContentLoaded', function () {
       loginForm.classList.add('hidden');
       loginForm.classList.remove('flex');
     };
-    // Attach click handlers to specific trigger elements in the HTML instead of a global listener
-      // online order
-      const onlineOrder = document.getElementById("onlineOrder");
+    
+      const onlineOrder = document.getElementById("orderModal");
       const num1 = document.getElementById("num1");
       const num2 = document.getElementById("num2");
       const sumElem = document.getElementById("sum");
+      const totalInput = document.getElementById("Total");
+      // Example: set price automatically based on selected drink
       
+      const drinkSelect = document.getElementById("drink");
+      drinkSelect.addEventListener('change', function () {
+        if (num2) {
+          if (drinkSelect.value === "iced-latte") num2.value = 2.15;
+          else if (drinkSelect.value === "iced-americano") num2.value = 3;
+          else if (drinkSelect.value === "iced-green-tea") num2.value = 1.75;
+          else if (drinkSelect.value === "iced-matcha-latte") num2.value = 1.59;
+          else if (drinkSelect.value === "hot-latte") num2.value = 2.15;
+          else num2.value = "";
+        }
+      });
+      
+      // compute total (quantity * price) and display in the Total input
       function process() {
         const a = Number(num1.value) || 0;
         const b = Number(num2.value) || 0;
-        const total = a + b;
-        if (sumElem) {
-          // support both input elements and normal elements
-          if ('value' in sumElem) sumElem.value = total;
-          else sumElem.textContent = total;
+        const total = a * b;
+        if (totalInput) {
+          totalInput.value = total;
         }
         return total;
+      }
+      if (sumElem) {
+        sumElem.addEventListener('click', function (e) {
+          e.preventDefault();
+          process();
+        });
       }
       
       window.openModalM = function () {
@@ -114,4 +132,3 @@ document.addEventListener('DOMContentLoaded', function () {
         onlineOrder.classList.add('hidden');
         onlineOrder.classList.remove('flex');
       };
-      // Do not call openModalM immediately or attach a global click handler here; attach to a specific trigger element instead
