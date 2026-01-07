@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
           head.style.width = '100%';
         }
       });
-      const listrightIcon = document.getElementById('listright');
-      const lists = [
+      const listrightIcon=document.getElementById('listright');
+      const lists= [
         "Iced latte",
         "Iced Cappucino",
         "Americano",
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const onlineOrder = document.getElementById("orderModal");
       const num1 = document.getElementById("num1");
       const num2 = document.getElementById("num2");
-      const sumElem = document.getElementById("sum");
+      const sum = document.getElementById("sum");
       const totalInput = document.getElementById("Total");
       // Example: set price automatically based on selected drink
       
@@ -115,13 +115,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return total;
       }
-      if (sumElem) {
-        sumElem.addEventListener('click', function (e) {
+      if (sum) {
+        sum.addEventListener('click', function (e) {
           e.preventDefault();
           process();
         });
       }
-      
       window.openModalM = function () {
         if (!onlineOrder) return;
         onlineOrder.classList.remove('hidden');
